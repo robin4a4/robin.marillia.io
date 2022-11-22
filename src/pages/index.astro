@@ -13,12 +13,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<Pill></Pill>
-			<ProjectCard/>
+	<body class="font-montserrat">
+		<Header/>
+		<main class="container mx-auto px-96">
+			<div class="mt-64 grid grid-cols-3 grid-rows-3 gap-x-32 gap-y-64">
+				<ProjectCard large/>
+				<ProjectCard/>
+				<ProjectCard/>
+				<ProjectCard/>
+				<ProjectCard/>
+				<ProjectCard/>
+				<ProjectCard large/>
+			</div>
 			<ArticleCard/>
 			<p>
 				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This

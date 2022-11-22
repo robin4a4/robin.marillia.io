@@ -34,12 +34,17 @@ module.exports = {
         48: "48px",
         56: "56px",
         64: "64px",
+        96: "96px",
+      },
+      fontFamily: {
+        montserrat: ["Montserrat"],
       },
       borderRadius: {
         DEFAULT: "4px",
         md: "8px",
         lg: "16px",
-        xl: "32px",
+        xl: "24px",
+        xxl: "32px",
         full: "9999px",
       },
       animation: {

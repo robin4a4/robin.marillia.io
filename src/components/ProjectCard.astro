@@ -1,9 +1,15 @@
 ---
 import Link from './Link.astro'
 import PillRow from './PillRow.astro';
+
+
+export interface Props {
+	large?: boolean;
+}
+const { large } = Astro.props;
 ---
 
-<div class="flex flex-col gap-16 px-24 pt-96 pb-24 bg-slate-100 rounded-xl">
+<div class={`flex flex-col gap-16 px-24 pt-80 pb-24 bg-slate-100 rounded-xl ${large ? 'col-span-2' : 'col-span-1'}`}>
   <div class="flex"></div>
   <div class="flex flex-col gap-16">
     <p class="text-24 font-bold text-slate-900">jSimple</p>
