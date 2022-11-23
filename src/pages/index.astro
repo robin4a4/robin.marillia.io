@@ -15,8 +15,8 @@ import { SITE_TITLE, SITE_DESCRIPTION, Project } from '../config';
 	</head>
 	<body class="font-montserrat">
 		<Header/>
-		<main class="container mx-auto px-96">
-			<div class="mt-64 grid grid-cols-3 grid-rows-3 gap-x-32 gap-y-64">
+		<main class="container mx-auto px-96 flex flex-col gap-64">
+			<section class="mt-64 grid grid-cols-3 grid-rows-3 gap-x-32 gap-y-64">
 				<ProjectCard project={Project.Jsimple}/>
 				<ProjectCard project={Project.Solidjs}/>
 				<ProjectCard project={Project.BagstackCli}/>
@@ -24,8 +24,15 @@ import { SITE_TITLE, SITE_DESCRIPTION, Project } from '../config';
 				<ProjectCard project={Project.NathalieMura}/>
 				<ProjectCard project={Project.Techwatch}/>
 				<ProjectCard project={Project.Randomart}/>
-			</div>
-			<ArticleCard/>
+			</section>
+			<section class="flex flex-col gap-32">
+				<h2 class="font-bold text-32 tex-slate-900">Last articles</h2>
+				<div class="grid grid-cols-2 grid-rows-2">
+					<ArticleCard/>
+					<ArticleCard/>
+					<ArticleCard/>
+				</div>
+			</section>
 			<p>
 				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
 				template serves as a lightweight, minimally-styled starting point for anyone looking to build

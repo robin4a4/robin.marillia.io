@@ -7,6 +7,6 @@ export interface Props {
 const { topic } = Astro.props;
 ---
 
-<div class={`flex px-12 py-8 rounded-full border text-14 font-semibold ${PILLS_DATA[topic].classes}`}>
+<div class:list={['flex px-12 py-8 rounded-full border text-14 font-semibold', PILLS_DATA[topic].classes]}>
     {PILLS_DATA[topic].title}
 </div>
