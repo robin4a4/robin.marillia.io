@@ -1,20 +1,22 @@
 ---
+import { Project, PROJECTS } from '../config';
 import Link from './Link.astro'
 import PillRow from './PillRow.astro';
 
 
 export interface Props {
-	large?: boolean;
+	project: Project;
 }
-const { large } = Astro.props;
+const { project } = Astro.props;
+const projectData = PROJECTS[project]
 ---
 
-<div class={`flex flex-col gap-16 px-24 pt-80 pb-24 bg-slate-100 rounded-xl ${large ? 'col-span-2' : 'col-span-1'}`}>
+<div class={`flex flex-col gap-16 px-24 pt-80 pb-24 bg-slate-100 rounded-xl ${projectData.isLarge ? 'col-span-2' : 'col-span-1'}`}>
   <div class="flex"></div>
   <div class="flex flex-col gap-16">
-    <p class="text-24 font-bold text-slate-900">jSimple</p>
-      <PillRow/>
-      <p class="text-18 font-medium text-slate-600">Reactive javascript library inspired from jQuery, Solid.js and alpine.js.</p>
+    <p class="text-24 font-bold text-slate-900">{projectData.title}</p>
+    <PillRow topics={projectData.topics}/>
+    <p class="text-18 font-medium text-slate-600">{projectData.text}</p>
   </div>
   <Link/>
 </div>

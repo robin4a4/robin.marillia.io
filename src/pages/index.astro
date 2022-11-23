@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import Pill from '../components/Pill.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import ArticleCard from '../components/ArticleCard.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import { SITE_TITLE, SITE_DESCRIPTION, Project } from '../config';
 ---
 
 <!DOCTYPE html>
@@ -17,13 +17,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 		<Header/>
 		<main class="container mx-auto px-96">
 			<div class="mt-64 grid grid-cols-3 grid-rows-3 gap-x-32 gap-y-64">
-				<ProjectCard large/>
-				<ProjectCard/>
-				<ProjectCard/>
-				<ProjectCard/>
-				<ProjectCard/>
-				<ProjectCard/>
-				<ProjectCard large/>
+				<ProjectCard project={Project.Jsimple}/>
+				<ProjectCard project={Project.Solidjs}/>
+				<ProjectCard project={Project.BagstackCli}/>
+				<ProjectCard project={Project.BagstackFigma}/>
+				<ProjectCard project={Project.NathalieMura}/>
+				<ProjectCard project={Project.Techwatch}/>
+				<ProjectCard project={Project.Randomart}/>
 			</div>
 			<ArticleCard/>
 			<p>

@@ -1,7 +1,17 @@
 ---
+import type { ProjectPill } from '../config';
 import Pill from './Pill.astro'
+
+export interface Props {
+	topics: Array<ProjectPill>;
+}
+const {topics} = Astro.props
 ---
 
-<div class="flex gap-16">
-  <Pill></Pill>
+<div class="flex gap-8">
+  {topics.map((topic) => (
+    <>
+       <Pill topic={topic}/>
+    </>
+  ))}
 </div>
