@@ -2,10 +2,14 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Pill from '../components/Pill.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import { SITE_TITLE, SITE_DESCRIPTION, Project } from '../config';
+
+// Use Astro.glob() to fetch all posts, and then sort them by date.
+const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
+	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+);
 ---
 
 <!DOCTYPE html>
@@ -28,9 +32,11 @@ import { SITE_TITLE, SITE_DESCRIPTION, Project } from '../config';
 			<section class="flex flex-col gap-32">
 				<h2 class="font-bold text-32 tex-slate-900">Last articles</h2>
 				<div class="grid grid-cols-2 grid-rows-2">
-					<ArticleCard/>
-					<ArticleCard/>
-					<ArticleCard/>
+					{posts.map((post) => (
+						<>
+							<ArticleCard post={post.frontmatter}/>
+						</>
+					))}
 				</div>
 			</section>
 			<p>
