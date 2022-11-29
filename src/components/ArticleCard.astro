@@ -2,10 +2,11 @@
 import Link from './Link.astro'
 
 export interface Props {
-    post: any
+    post: any,
+    url: string
 }
 
-const {post} = Astro.props
+const {post, url} = Astro.props
 
 ---
 
@@ -16,7 +17,7 @@ const {post} = Astro.props
             <p class="text-18 font-medium text-slate-500">{post.description}</p>
             <p class="text-24 font-medium text-slate-400">June 5th, 2022 — 5 min read</p>
         </div>
-        <Link/>
+        <Link href={url} hasAbsoluteInset>Learn more</Link>
     </div>
     <div class="flex rounded-xl bg-pink-400"></div>
 </div>

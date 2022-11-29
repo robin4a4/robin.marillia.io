@@ -23,52 +23,8 @@ export enum ProjectPill {
   Svelte = "svelte",
   Solidjs = "solidjs",
   Typescript = "typescript",
+  Planetscale = "planetscale",
 }
-
-export const PROJECTS = {
-  [Project.Jsimple]: {
-    title: "jSimple",
-    text: "Reactive javascript library inspired from jQuery, Solid.js and alpine.js. It was design as a companion library for frameworks like Django or laravel.",
-    topics: [ProjectPill.Experiment, ProjectPill.Code],
-    isLarge: true,
-  },
-  [Project.Solidjs]: {
-    title: "Solidjs docs redesign",
-    text: "Redesign of the futur Solidjs docs.",
-    topics: [ProjectPill.Project, ProjectPill.Design, ProjectPill.Solidjs],
-    isLarge: false,
-  },
-  [Project.BagstackFigma]: {
-    title: "Bagstack figma plugin",
-    text: "Creation of a figma plugin that extracts code from figma components.",
-    topics: [ProjectPill.Experiment, ProjectPill.Typescript],
-    isLarge: true,
-  },
-  [Project.BagstackCli]: {
-    title: "Bagstack-cli",
-    text: "CLI that helps bootstrap a front-end typescript project using React, Solid or Svelte.",
-    topics: [ProjectPill.Experiment, ProjectPill.Typescript],
-    isLarge: false,
-  },
-  [Project.NathalieMura]: {
-    title: "Nathalie-mura.fr",
-    text: "Refactoring of Nathalie Mura's website using Nextjs and Strapi CMS.",
-    topics: [ProjectPill.Project, ProjectPill.Nextjs, ProjectPill.Strapi],
-    isLarge: false,
-  },
-  [Project.Techwatch]: {
-    title: "Techwatch",
-    text: "Little app that stores useful links and resources about design and computing.",
-    topics: [ProjectPill.Project, ProjectPill.Nextjs, ProjectPill.Strapi],
-    isLarge: false,
-  },
-  [Project.Randomart]: {
-    title: "Randomart",
-    text: "Random art ideas generator from mokups to instagram stories.",
-    topics: [ProjectPill.Project, ProjectPill.Svelte],
-    isLarge: false,
-  },
-};
 
 const greenClasses = "bg-lime-100 text-lime-800 border-lime-300";
 const grayClasses = "bg-slate-200 text-slate-800 border-slate-300";
@@ -117,6 +73,10 @@ export const PILLS_DATA = {
   },
   [ProjectPill.Typescript]: {
     title: "Typescript",
+    classes: grayClasses,
+  },
+  [ProjectPill.Planetscale]: {
+    title: "Planetscale",
     classes: grayClasses,
   },
 };

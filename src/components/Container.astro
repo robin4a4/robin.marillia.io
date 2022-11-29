@@ -1,0 +1,11 @@
+---
+export interface Props {
+	classes?: string;
+}
+
+const {classes} = Astro.props
+---
+
+<section class:list={['container mx-auto px-[124px]', classes]}>
+    <slot/>
+</section>
