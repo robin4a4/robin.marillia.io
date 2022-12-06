@@ -18,8 +18,23 @@ import blurSvg from '../assets/blur4.svg'
 		</filter>
 		</defs>
 	</svg>
+	<div class='w-[512px] h-[512px] absolute top-0 right-0 mt-104 mr-104'>
+		<canvas data-id='illu'></canvas>
+	</div>
+	
 	<Container classes="relative z-10">
 		<span class="font-semibold text-48 mb-24 block text-pink-400">Robin Marillia</span>
 		<h1 class="font-semibold text-64 max-w-[90%] leading-tight">Fullstack developer at <span class="text-pink-400">Hello watt.</span><br/>Based in <span class="text-pink-400">Paris.</span></h1>
 	</Container>
 </header>
+
+<script>
+	import { Application } from '@splinetool/runtime';
+  
+	const canvas = document.querySelector<HTMLCanvasElement>("[data-id='illu']")
+	if(canvas) {
+		const app = new Application(canvas);
+		app.setSize(112, 112)
+		app.load('https://prod.spline.design/fGikRDuLTYFJdKw3/scene.splinecode')
+	}
+  </script>
