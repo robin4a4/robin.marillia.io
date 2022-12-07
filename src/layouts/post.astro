@@ -30,12 +30,21 @@ const {
 				font-size: 24px;
 				color: theme(colors.blue.600)
 			}
+			h3 {
+				margin-top: 24px;
+				margin-bottom: 16px;
+				font-weight: 600;
+				font-size: 20px;
+			}
 			p, ul {
 				margin-bottom: 18px;
 				font-size: 18px;
 				font-weight: 500
 			}
-			
+			a {
+				font-weight: 600;
+				color: theme(colors.blue.600)
+			}
 			ul {
 				padding-left: 16px;
 				display: flex;
@@ -52,8 +61,8 @@ const {
 	</head>
 
 	<body class="font-montserrat text-slate-800">
-		<header class="relative pt-88 mb-64">
-			<svg width="1920" height="194" class='absolute top-0 inset-x-0 z-0 w-full' viewBox="0 0 1920 194" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<header class="relative pt-112 md:pt-88 w-full mb-64">
+			<svg width="1920" height="194" class='absolute top-0 max-md:-mt-64 inset-x-0 z-0 w-full' viewBox="0 0 1920 194" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g filter="url(#filter0_f_19_817)">
 				<path class='animate-pulse' d="M724.8 18.1722C530.547 39.2001 154.835 34.2064 -8.73973 29.081C-17.4764 7.00399 -34.0478 -37.6269 -30.4407 -39.5343C-25.9319 -41.9185 191.407 -45.9167 565.742 -49.2334C936.513 -52.5185 950.433 -49.7577 985.191 -42.8637L986.2 -42.6638C1021.73 -35.6235 967.616 -8.11267 724.8 18.1722Z" fill="#EC4899"/>
 				<path class='animate-pulse' style='animation-delay: .7s' d="M1473.47 22.9651C1254.56 38.6995 831.316 36.3923 647.058 33.2719C637.291 17.4732 618.773 -14.4692 622.843 -15.8489C627.931 -17.5736 872.788 -21.1766 1294.51 -24.823C1712.21 -28.4347 1727.89 -26.5025 1767.02 -21.6776L1768.15 -21.5377C1808.16 -16.6105 1747.1 3.29706 1473.47 22.9651Z" fill="#9333EA"/>
@@ -69,7 +78,7 @@ const {
 			</svg>
 			<Container classes="relative z-10">
 				<span class="font-semibold text-48 mb-24 block text-pink-400">Robin Marillia</span>
-				<div class="px-112 pt-64 mt-64 border-t border-slate-200 flex flex-col gap-32">
+				<div class="md:px-112 pt-32 mt-32 md:pt-64 md:mt-64 border-t border-slate-200 flex flex-col gap-32">
 					<Link href='../' toLeft>Back to home</Link>
 					<h1 class="font-semibold text-48 max-w-[90%] leading-tight">{title}</h1>
 					<div class="text-slate-400 font-semibold">
@@ -87,7 +96,7 @@ const {
 			</Container>
 		</header>
 		<Container>
-			<article class="px-112 pb-64">
+			<article class="md:px-112 pb-64">
 				<slot />
 			</article>
 		</Container>

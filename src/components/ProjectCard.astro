@@ -10,8 +10,7 @@ export interface Props {
 const { project, url } = Astro.props;
 ---
 
-<div data-id='project-card' class:list={[' group relative flex flex-col justify-between gap-16 px-16 pt-80 pb-16 bg-slate-100 rounded-xl hover:scale-[1.025] transition', project.largeCard ? 'col-span-2' : 'col-span-1']}>
-  <div data-id='illu' class="absolute top-0 left-0 -mt-64"></div>
+<div data-id='project-card' class:list={['snap-center max-md:min-w-[348px] relative flex flex-col justify-between gap-16 px-16 pb-16 pt-32 bg-slate-100 rounded-xl hover:scale-[1.015] transition', project.largeCard ? 'col-span-2' : 'col-span-1']}>
   <div class="flex flex-col gap-16">
     <p class="text-24 font-semibold text-slate-800">{project.title}</p>
     <PillRow topics={project.topics}/>
@@ -19,87 +18,3 @@ const { project, url } = Astro.props;
   </div>
   <Link href={url} hasAbsoluteInset>Learn more</Link>
 </div>
-
-<script>
-  import * as THREE from 'three';
-  import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-
-  function modelLoader(scene, filename, name, position) {
-  const loader = new GLTFLoader();
-  loader.load(
-      filename,
-      (gltf) => {
-        const object = gltf.scene;
-
-        // object.position.set(position.x, position.y, position.z);
-        // object.scale.set(0.35, 0.35, 0.35);
-        // gltf.scene.traverse((child) => {
-        //   const childMaterial = child.material;
-        //   if (child.material) childMaterial.metalness = 0;
-        // });
-        scene.add(object);
-      },
-      undefined,
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
-
-
-
-  const cards = document.querySelectorAll("[data-id='project-card']")
-
-  cards.forEach((card) => {
-    const illuContainer = card.querySelector("[data-id='illu']")
-    if (!illuContainer) return
-
-    const scene = new THREE.Scene();
-			const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-			const renderer = new THREE.WebGLRenderer({alpha: true});
-			renderer.setSize( 200, 200 );
-			illuContainer.appendChild( renderer.domElement );
-
-			const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-			const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-			const cube = new THREE.Mesh( geometry, material );
-			scene.add( cube );
-
-			camera.position.z = 5;
-      modelLoader(scene, '../../public/renders/macbook-min.glb', 'rubix', {
-        x: 0,
-        y: 0,
-        z: 0,
-      });
-      const rectLight1 = new THREE.RectAreaLight(0x850945, 5, 4, 10);
-    rectLight1.rotation.set(0, 90, 0);
-    rectLight1.position.set(-5, 5, 5);
-
-    scene.add(rectLight1);
-
-    const rectLight2 = new THREE.RectAreaLight(0xc95304, 5, 4, 10);
-    rectLight2.position.set(0, 5, 5);
-    scene.add(rectLight2);
-
-    const rectLight3 = new THREE.RectAreaLight(0x0400ff, 5, 4, 10);
-    rectLight3.position.set(5, 5, 5);
-    scene.add(rectLight3);
-
-    const rectLight4 = new THREE.RectAreaLight(0x850945, 5, 4, 10);
-    rectLight4.position.set(-5, 5, 5);
-    scene.add(rectLight4);
-
-			function animate() {
-				requestAnimationFrame( animate );
-
-				cube.rotation.x += 0.01;
-				cube.rotation.y += 0.01;
-
-				renderer.render( scene, camera );
-			};
-
-			animate();
-
-  })
-</script>

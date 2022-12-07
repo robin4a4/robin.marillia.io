@@ -23,7 +23,7 @@ const projects = (await Astro.glob('./projects/*.{md,mdx}')).sort(
 	<body class="font-montserrat text-slate-800">
 		<Header/>
 		<Container classes='flex flex-col gap-64'>
-			<section class="mt-64 grid grid-cols-3 grid-rows-3 gap-x-24 gap-y-32">
+			<section class="mt-64 snap-x max-md:flex max-md:overflow-x-auto max-md:flex-no-wrap md:grid grid-cols-3 grid-rows-3 gap-x-24 gap-y-32">
 				{projects.map((project) => (
 					<>
 						<ProjectCard url={project.url} project={project.frontmatter}/>
