@@ -11,11 +11,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^0.11.6",
-    "@astrojs/rss": "^1.0.3",
-    "@astrojs/sitemap": "^1.0.0",
-    "@splinetool/runtime": "^0.9.150",
-    "astro": "^1.6.8"
+    "@astrojs/mdx": "^0.19.7",
+    "@astrojs/rss": "^2.4.3",
+    "@astrojs/sitemap": "^2.0.1",
+    "astro": "^2.10.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
