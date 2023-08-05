@@ -9,10 +9,127 @@ order: 1
 pubDate: "June 5 2023"
 ---
 
-After experimenting with creating my own framework, I wanted to use the newest app router using React server components (RFC's) in a brand new project where I could use bleeding edge tech and to notch libraries.
+After experimenting with creating my own framework, I wanted to use the newest app router using React server components (RSCs) in a brand new project where I could use bleeding edge tech and to notch libraries.
 
 Because my Techwatch database went to sleep and because I wanted to be able to store more that links and better manage my categories, I decided to create a new app called Shareboard.
 
 ## What is Shareboard?
 
 A white canvas with drabble notes, images and files. You can create as many boards as you want and share them with anyone using a shareable link. The authentication is done using Clerk and the data is stored in PlanetScale.
+
+## Secondary goal: have a native app feel
+
+Another goal I had was that the app could be used as a PWA and feel like a native app. Do do that I had to resort to some classic SPA development tricks that are not really compatible (yet, and with my experience) with the new Next.js router paradigm.
+
+### Parallel and interception routes
+
+For exemple I wanted to use parallel and interception routes to open the board modal while automaticaly changing the url. The issue is that it was tricky to open the modal directly on a button's click while the board's data was loading:
+
+- either the modal was not opened because the data was not loaded yet
+- or the modal was opened but the data was not loaded yet and the user had to wait for the data to be loaded
+
+To have an app like feeling, the second pattern is better as it is snappier (direct feedback on click) but to do that with parallel routes did not result in a great DX because the client modal component had to live in the layout.tsx file.
+
+I ended up doing this pattern directly in the client component close to the button as we will be doing in some classic SPA app but without the url changing. In a PWA it does not matter because the url is not displayed so it is good enough
+
+### iOS status bar
+
+Another issue I had was that I wanted to make the status bar on iOS transparent but with black text. Turns out [it is not possible](https://stackoverflow.com/a/40786240). I decided to make the status bar black and to make the top corners of the app rounded.
+
+## Tech Stack
+
+### Next.js
+
+#### RSC's
+
+I wanted to try RSCs as I think they are a huge improvement over the current Next.js getServerSideProps function. It make the data fetching much more explicit and easier to understand as you just have to await the data in the React component.
+
+```javascript
+export default async function Page() {
+  const user: User | null = await currentUser();
+
+  if (!user) return <>No user connected.</>;
+
+  const boards = await getBoards(user.id);
+
+  return (
+    <div>
+      <h1>Boards</h1>
+      <ul>
+        {boards.map((board) => (
+          <li key={board.id}>{board.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+#### Server action
+
+At first I used route handlers to mutate the data as there wheren't any way to mutate data from the client side. When Vercel released the new server actions, I decided to use them instead. There are a few issues with caching and invalidating data but it's still a huge improvement in DX over route handlers.
+The issues are maily due to the fact that I do not use fetch and couldn't at the time use the invalidate tags mechanism.
+
+### Framer motion
+
+I mainly used framer motion to animate element on unmount using the `<AnimatePresence>` component. In the future I'd like to animate the board's sheet modal using framer motion instead of janky css animations.
+
+### Radix UI
+
+Radix UI allows me to rapidly create UI element such as modals or dropdowns. The way i use it is that I create wrapper components that only style the native radix component. Because I want to control my element to animate them using framer motion, I often wrap the root with a small context to pass eleemnt to children Radix elements.
+
+```javascript
+// Small context to pass the open state to the children
+export const DropdownContext = createContext<{
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}>({
+  isOpen: false,
+  setIsOpen: () => {},
+});
+```
+
+```javascript
+// Wrapper components that do almost nothing (for example the trigger) but styling
+export function DropdownRoot({ children }: PropsWithChildren) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <DropdownContext.Provider value={{ isOpen, setIsOpen }}>
+      <DropdownMenu.Root open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
+        {children}
+      </DropdownMenu.Root>
+    </DropdownContext.Provider>
+  );
+}
+
+export const DropdownTrigger = DropdownMenu.Trigger;
+
+export function DropdownContent({ children }: PropsWithChildren) {
+  const { isOpen } = useContext(DropdownContext);
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <DropdownMenu.Portal forceMount>
+          <DropdownMenu.Content asChild sideOffset={8} align="end">
+            <motion.div
+              key="dropdown"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="bg-white/70 backdrop-blur-lg rounded-xl p-16 border border-slate-200 flex flex-col gap-4 z-[100]"
+            >
+              {children}
+            </motion.div>
+          </DropdownMenu.Content>
+        </DropdownMenu.Portal>
+      )}
+    </AnimatePresence>
+  );
+}
+```
+
+### Other libraries
+
+- Tailwind CSS: my main way of styling react components in every projects
+- React flow: the library that help me manage the drag/zoom and pan of the board's canvas
