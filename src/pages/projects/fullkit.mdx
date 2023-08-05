@@ -1,6 +1,6 @@
 ---
 layout: "../../layouts/post.astro"
-title: "Creating Fullkit"
+title: "Fullkit, a Django-like framework in typescript"
 description: "Experiment with creating a fullstack framework using vite-plugin-ssr."
 heroImage: "/fullkit.png"
 topics: ["experiment", "code"]
@@ -9,230 +9,139 @@ order: 2
 pubDate: "Feb 2023"
 ---
 
-I created a small javascript library that aims to ease the creation of user experiences while using fullstack framworks such as Django or Laravel.
+Following the experiment of creating [jSimple](/projects/jsimple) I wanted to go further and create a fullstack framework. I wanted to create something that would be easy to use and that would be a good alternative to the current frameworks. The excuse was to rewrite my project [Techwatch](/projects/techwatch) from SvelteKit to my own janky framework (great idea!).
 
-## Why jSimple?
+## Philosophy
 
-It is mostly an experiment. First, I wanted to learn how to create, publish and maintain a javascript package.
+Similar to class based view in Django, Fullkit uses classes to define views and layouts. It is not as flexible as Django because the inheritance story is not great in javascript but you can inherit from either the `View` class or the `Layout` class. You then define an HTML template that will be rendered by the server.
 
-The initial goal was to create a modern jQuery as I came to the realisation that it did a lot of nice things. For example I still find its way of querying dom element more elegant than the standard `document.querySelector()`
-
-I also wanted to facilitate the way we add interactions in templates in frameworks such as Django which we use heavely at Hello watt. For codebases that are not fully javascript it seems that the current approach is either:
-
-- to have a full javascript frontend with framworks such as React or Vue and an api with a backend frameworks (Django with Django Rest Framework for instance)
-- a huge monolith using the templating langage of the fullstack framework
-
-I thought that we might need something to add some fun in the second case.
-
-However the current result is just a fun experiment and should not be used in production.
-
-## How is it orchestrated
-
-The repository is a monorepo that uses **pnpm workspaces** and **Turborepo** for the build step. I chose them because I heard a lot of good things about them but I found that it is pretty similar to npm workspaces for a small project like that.
+There are some addition to standard HTML like the `include` tag that allows you to include another template and the `for` tag that allows you to loop over an array. Just like Django, to get the data from the View to the template you use the `getContextData()` method.
 
 ## Get started
 
-To install the core library enter the following command:
+To install the server library enter the following command:
 
 ```
-npm install @jsimple/core
+npm install @fullkit/server @fullkit/stem-renderer
 ```
 
-To install the additional dom rendering library enter the following command:
+You can also install only the packages you like for exemple `@fullkit/client` to use the reactivity functions inspired by Solidjs.
 
 ```
-npm install @jsimple/dom-render
-```
-
-To install the additional custom element library enter the following command:
-
-```
-npm install @jsimple/custom-element
-```
-
-If you need to fetch data and cache it the fetcher package is here for you:
-
-```
-npm install @jsimple/fetcher
+npm install @fullkit/client
 ```
 
 ## Example
 
-### Core
+```typescript
+// index.ts
 
-The core library includes a reactive system that makes building dom interaction easier.
+import { View } from "@fullkit/stem-renderer";
 
-```javascript
-// Javascript file
-import $ from "@jsimple/core";
+export class Page extends View {
+  templateName = "index.html";
 
-const btn = $.select("#btn");
-const container = $.select("#container");
-const [isOpen, setIsOpen] = $.signal(false);
-
-$.effect(() => {
-  container?.html(`
-    <div style='display: ${isOpen() ? "block" : "none"}'>
-      Lorem ipsum
-    </div>
-  `);
-});
-
-btn?.onClick(() => {
-  setIsOpen(!isOpen());
-});
-```
-
-```html
-<!-- HTML file-->
-<button id="btn" type="button">open</button>
-<div id="container"></div>
-```
-
-You can read more on this package here: [@jsimple/core](https://github.com/robin4a4/jSimple/tree/main/packages/core)
-
-### DOM-render
-
-Using the dom-render package you can simplify this markup like the following example. It is heavily inspired by Alpinejs.
-
-```html
-<!-- HTML file-->
-<div data-define="app-component">
-  <button id="btn" type="button" $click="setIsOpen(!isOpen())">open</button>
-  <div $display="isOpen()">lorem ipsum</div>
-</div>
-```
-
-```javascript
-// Javascript file
-import $ from "@jsimple/core";
-import { DOMRender } from "@jsimple/dom-render";
-
-function AppComponent() {
-  const [isOpen, setIsOpen] = $.signal(false);
-  return { isOpen, setIsOpen };
-}
-
-run([AppComponent]);
-```
-
-or without the run function:
-
-```javascript
-// Javascript file
-import $ from "@jsimple/core";
-import { DOMRender } from "@jsimple/dom-render";
-
-const [isOpen, setIsOpen] = $.signal(false);
-DOMRender({ isOpen, setIsOpen }, $.select("[data-define='app']"));
-```
-
-You can read more on this package here: [@jsimple/dom-render](https://github.com/robin4a4/jSimple/tree/main/packages/dom-render)
-
-### Custom element
-
-If you'd like to use the dom-render APIs in custom elements we provide decorators wrappers to abstract some of the plumbing:
-
-```html
-<!-- HTML file-->
-<fancy-button></fancy-button>
-```
-
-```javascript
-// Javascript file
-import { define, s } from "@jsimple/custom-element";
-
-export
-@define("fancy-button")
-class FancyButton extends HTMLElement {
-  @s(false) isOpenSignal: TSignal<boolean>;
-
-  connectedCallback() {
-    this.html(`
-    <div>
-      <button type="button" $click="setIsOpen(!isOpen())">open</button>
-      <div $display="isOpen()">lorem ipsum</div>
-    </div>
-    `);
+  getContextData() {
+    return {
+      title: "Hello World",
+      nav: [
+        { href: "/", name: "home" },
+        { href: "/about", name: "about" },
+      ],
+    };
   }
 }
 ```
 
-If you'd like to use it without decorators you can do as follow:
+```html
+<!-- index.html -->
 
-```javascript
-import $ from "@jsimple/core";
-import { DOMRender } from "@jsimple/dom-render";
-
-export class FancyButton extends HTMLElement {
-  isOpen: TSignal<boolean>[0];
-  setIsOpen: TSignal<boolean>[1];
-
-  constructor() {
-    super();
-    [this.isOpen, this.setIsOpen] = $.signal(true);
-  }
-
-  connectedCallback() {
-    this.html(`
-    <div>
-    <button type="button" $click="setIsOpen(!isOpen())">open</button>
-    <div $display="isOpen()">lorem ipsum</div>
-    </div>
-    `);
-    DOMRender(
-      {
-        isOpen: this.isOpen,
-        setIsOpen: this.setIsOpen,
-      },
-      this
-    );
-  }
-}
-customElements.define("fancy-button", FancyButton);
+<h1>{title}</h1>
+<nav>
+  <ul>
+    <for condition="const item in nav">
+      <include src="nav_item.html" with="item: item"></include>
+    </for>
+  </ul>
+</nav>
 ```
 
-You can read more on this package here: [@jsimple/custom-element](https://github.com/robin4a4/jSimple/tree/main/packages/custom-element)
+## Features
 
-### Fetcher
+Fullkit uses vite-plugin-ssr under the hood.
 
-Using the fetcher package you can fetch and cache data easily.
+### File base routing
+
+Note: The root page must be under an index folder.
+
+### Layouts
+
+```typescript
+// layout.ts
+
+import { Layout } from "@fullkit/stem-renderer";
+
+export class MainLayout extends Layout {
+  templateName = "layout.html";
+
+  getContextData() {
+    return {
+      title: "Site title",
+      nav: [
+        { href: "/", name: "home" },
+        { href: "/about", name: "about" },
+      ],
+    };
+  }
+}
+```
 
 ```html
-<!-- HTML file-->
-<div data-define="component-with-data" class="component">
-  <img
-    src="./spinner.svg"
-    $display="isLoading()"
-    class="spinner"
-    width="24"
-    height="24"
-    alt="spinner"
-  />
-  <div $display="!isLoading()" class="card">
-    <p class="font-bold uppercase text-14 text-slate-900">{data()?.name}</p>
-    <span>{data()?.body}</span>
-  </div>
-</div>
+<!-- layout.html -->
+
+<h1>{title}</h1>
+<nav>
+  <ul>
+    <for condition="const item in nav">
+      <li><a href="{item.href}">{item.name}</a></li>
+    </for>
+  </ul>
+</nav>
+<slot></slot>
 ```
 
-```javascript
-// Javascript file
-import { run } from "@jsimple/dom-render";
-import { GET, load } from "@jsimple/fetcher";
+```typescript
+// about.ts
 
-const getTodos =
-  GET < TodoData > "https://jsonplaceholder.typicode.com/comments/1";
+import { View } from "@fullkit/stem-renderer";
+import { MainLayout } from "./layout.ts";
 
-function ComponentWithData() {
-  const { data, isLoading } = load(getTodos, ["keyString"]);
-  return {
-    data,
-    isLoading,
-  };
+export class Page extends View {
+  templateName = "index.html";
+  layoutClass = MainLayout;
+  getContextData() {
+    return {
+      content: "About page !",
+    };
+  }
 }
-
-run([ComponentWithData]);
 ```
 
-You can read more on this package here: [@jsimple/fetcher](https://github.com/robin4a4/jSimple/tree/main/packages/fetcher)
+```html
+<!-- index.html -->
+
+<p>{content}</p>
+```
+
+The resulting html will be:
+
+```html
+<h1>Site title</h1>
+<nav>
+  <ul>
+    <li><a href="/">home</a></li>
+    <li><a href="/about">about</a></li>
+  </ul>
+</nav>
+<p>About page !</p>
+```
