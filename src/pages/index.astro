@@ -1,46 +1,54 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import ArticleCard from '../components/ArticleCard.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
-import Container from '../components/Container.astro';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import ArticleCard from "../components/ArticleCard.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+import Container from "../components/Container.astro";
 
-const posts = (await Astro.glob('./blog/*.{md,mdx}')).sort(
-	(a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf()
+const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf()
 );
-const projects = (await Astro.glob('./projects/*.{md,mdx}')).sort(
-	(a, b) => a.frontmatter.order - b.frontmatter.order
+const projects = (await Astro.glob("./projects/*.{md,mdx}")).sort(
+  (a, b) => a.frontmatter.order - b.frontmatter.order
 );
 ---
 
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body class="font-montserrat text-slate-800">
-		<Header/>
-		<Container classes='flex flex-col gap-64'>
-			<section class="mt-64 snap-x max-md:flex max-md:overflow-x-auto max-md:flex-no-wrap md:grid grid-cols-3 grid-rows-3 gap-x-24 gap-y-32">
-				{projects.map((project) => (
-					<>
-						<ProjectCard url={project.url} project={project.frontmatter}/>
-					</>
-				))}
-			</section>
-			<section class="flex flex-col gap-32">
-				<h2 class="font-bold text-32 tex-slate-900">Last articles</h2>
-				<div class="grid grid-cols-2 grid-rows-2">
-					{posts.map((post) => (
-						<>
-							<ArticleCard url={post.url} post={post.frontmatter}/>
-						</>
-					))}
-				</div>
-			</section>
-		</Container>
-		<Footer />
-	</body>
+<html lang="en" class="bg-blue-100">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body class="font-montserrat text-slate-800 bg-white">
+    <Header />
+    <Container classes="flex flex-col gap-64">
+      <section
+        class="max-md:-mx-16 max-md:px-16 max-md:pb-16 max-md:flex max-md:overflow-x-auto max-md:flex-no-wrap mt-64 snap-mandatory snap-x md:grid grid-cols-3 grid-rows-3 gap-x-24 gap-y-32"
+      >
+        {
+          projects.map((project) => (
+            <>
+              <ProjectCard url={project.url} project={project.frontmatter} />
+            </>
+          ))
+        }
+      </section>
+      <section class="flex flex-col gap-32">
+        <h2 class="font-bold text-32 tex-slate-900">Last articles</h2>
+        <div class="grid grid-cols-2 grid-rows-2">
+          {
+            posts.map((post) => (
+              <>
+                <ArticleCard url={post.url} post={post.frontmatter} />
+              </>
+            ))
+          }
+        </div>
+      </section>
+    </Container>
+    <Footer />
+  </body>
 </html>
