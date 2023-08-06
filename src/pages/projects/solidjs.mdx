@@ -9,8 +9,22 @@ pubDate: "Aug 12 2022"
 order: 4
 ---
 
-[Solidjs](https://www.solidjs.com) is a modern javascript framework that has a new approch on reactivity and dom rendering. I love it because its syntax is close to react which I know well but its reactivity system seems much more intuitive and simpler. For exemple there is no dependency arrays and no "too many re-renders".
+[Solidjs](https://www.solidjs.com) is a modern javascript framework that has a new approch on reactivity and dom rendering. I love it because its syntax is close to react which I know well but its reactivity system seems much more intuitive and simpler. For exemple there is no dependency arrays and no "too many re-renders" hell.
 
 I wanted to contribute a little so I chose to redesign the next iteration of their docs.
 
 ## Figma design and prototypes
+
+I used Figma to create a first draft of the design. I wanted to keep the same structure of the docs and just change the color palette a little to make it more modern and more readable.
+
+I made [an issue](https://github.com/solidjs/solid-docs-next/issues/136) on the repo to discuss the design with the community and the Solidjs team. I got some great positive feedback and I made some changes to the design according to some suggestions made by community members.
+
+## Implementation
+
+The Implementation was pretty straight forward. I just had to change the css variables and the colors of the components. I had to change some components such as the foldable menu on the side bar. I implemented an `<InteractiveExample>` component to better manage the examples in the docs. I also added a **previous and next** sections link components to to allow for a better navigation as there was only a **next** link before.
+
+I then created [this PR](https://github.com/solidjs/solid-docs-next/pull/142) to the repo and it was merged.
+
+## Future iterations
+
+For now the docs are still in beta. I don't know if my design will stick or if it will be changed in an global effort to rebrand the solidjs library by more professional designers but in the mean time I was very happy to help designing a little bit of the docs of a library I love.
