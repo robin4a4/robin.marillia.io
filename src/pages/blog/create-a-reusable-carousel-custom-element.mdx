@@ -8,6 +8,12 @@ heroImage: "/placeholder-hero.jpg"
 
 Using the future scroll timeline API, we will create a reusable carousel custom element that should be usable with any framework. This article will show you multiple ways to create a carousel custom element.
 
+## The main idea
+
+The future scroll timeline API is a new API that allows us to create scroll-based animations. It is currently only supported in Chrome and Edge, but it is usable via [this up-to-date polyfill](https://github.com/flackr/scroll-timeline)
+
+There are two APIs, the CSS API and the JS API, both are supported in the polyfill.
+
 ## Final result using Astro
 
 ```javascript
@@ -21,7 +27,7 @@ const { itemNumber } = Astro.props;
 <carousel-component>
   <ul
     data-slides-container
-    class="max-md:-mx-16 max-md:px-16 max-md:pb-16 max-md:flex max-md:flex-row max-md:overflow-x-auto max-md:flex-no-wrap mt-64 snap-mandatory snap-x md:grid grid-cols-3 grid-rows-3 gap-x-24 gap-y-32"
+    class="-mx-16 px-16 pb-16 flex flex-rowoverflow-x-auto flex-no-wrap snap-mandatory snap-x gap-24"
   >
     <slot />
   </ul>
@@ -74,7 +80,6 @@ const { itemNumber } = Astro.props;
       slideDots.forEach((dot, index) => {
         dot.animate(this.keyframes, {
           fill: "both",
-          // @ts-ignore
           timeline: new ViewTimeline({
             subject: slidesContainer.children[index],
             axis: "inline",
