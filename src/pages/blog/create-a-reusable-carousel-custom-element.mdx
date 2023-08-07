@@ -1,4 +1,17 @@
 ---
+layout: "../../layouts/post.astro"
+title: "Create a reusable carousel custom element"
+description: "Use the future scroll timeline API and learn multiple ways to create a reusable carousel custom element."
+pubDate: "Aug 07 2023"
+heroImage: "/placeholder-hero.jpg"
+---
+
+Using the future scroll timeline API, we will create a reusable carousel custom element that should be usable with any framework. This article will show you multiple ways to create a carousel custom element.
+
+## Final result using Astro
+
+```javascript
+---
 export interface Props {
   itemNumber: number;
 }
@@ -8,7 +21,7 @@ const { itemNumber } = Astro.props;
 <carousel-component>
   <ul
     data-slides-container
-    class="max-md:-mx-16 max-md:px-16 max-md:pb-16 max-md:flex max-md:flex-row max-md:overflow-x-auto max-md:flex-no-wrap snap-mandatory snap-x md:grid grid-cols-3 grid-rows-3 gap-x-24 gap-y-32"
+    class="max-md:-mx-16 max-md:px-16 max-md:pb-16 max-md:flex max-md:flex-row max-md:overflow-x-auto max-md:flex-no-wrap mt-64 snap-mandatory snap-x md:grid grid-cols-3 grid-rows-3 gap-x-24 gap-y-32"
   >
     <slot />
   </ul>
@@ -51,17 +64,6 @@ const { itemNumber } = Astro.props;
       },
     ];
 
-    getKeyframes(currentItem: number, slideNumber: number) {
-      return [...Array(slideNumber)].map((_, index) => {
-        const scale = currentItem === index ? 1.3 : 1;
-        const backgroundColor = currentItem === index ? "#f472b6" : "#e2e8f0";
-        return {
-          scale,
-          backgroundColor,
-        };
-      });
-    }
-
     connectedCallback() {
       const slidesContainer = this.querySelector(
         "[data-slides-container]"
@@ -70,11 +72,11 @@ const { itemNumber } = Astro.props;
         "[data-slide-dot]"
       ) as NodeListOf<HTMLDivElement>;
       slideDots.forEach((dot, index) => {
-        dot.animate(this.getKeyframes(index, slideDots.length), {
+        dot.animate(this.keyframes, {
           fill: "both",
           // @ts-ignore
-          timeline: new ScrollTimeline({
-            source: slidesContainer,
+          timeline: new ViewTimeline({
+            subject: slidesContainer.children[index],
             axis: "inline",
           }),
         });
@@ -83,3 +85,4 @@ const { itemNumber } = Astro.props;
   }
   customElements.define("carousel-component", CarouselComponent);
 </script>
+```
