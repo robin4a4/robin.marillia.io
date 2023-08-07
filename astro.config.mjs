@@ -5,7 +5,6 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://robin.marillia.io",
   integrations: [mdx(), sitemap()],
-  assetsInclude: ["**/*.glb"],
 });

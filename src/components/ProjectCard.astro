@@ -5,13 +5,11 @@ import PillRow from "./PillRow.astro";
 export interface Props {
   project: any;
   url: string;
-  index: number;
 }
-const { project, url, index } = Astro.props;
+const { project, url } = Astro.props;
 ---
 
 <li
-  data-slide={index}
   class:list={[
     "snap-center max-md:min-w-[348px] relative flex items-center justify-between gap-16 px-16 pb-16 pt-32 bg-slate-100 rounded-xl hover:scale-[1.015] group transition list-style-none",
     project.largeCard ? "col-span-2" : "col-span-1",

@@ -3,6 +3,8 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Container from "../components/Container.astro";
 import Link from "../components/Link.astro";
+import Shell from "./shell.astro";
+import Body from "./body.astro";
 
 export interface Props {
   content: {
@@ -19,49 +21,12 @@ const {
 } = Astro.props;
 ---
 
-<html lang="en" class="bg-blue-100">
+<Shell>
   <head>
     <BaseHead title={title} description={description} />
-    <style is:global>
-      h2 {
-        margin-top: 64px;
-        margin-bottom: 32px;
-        font-weight: 600;
-        font-size: 24px;
-        color: theme(colors.blue.600);
-      }
-      h3 {
-        margin-top: 24px;
-        margin-bottom: 16px;
-        font-weight: 600;
-        font-size: 20px;
-      }
-      p,
-      ul {
-        margin-bottom: 18px;
-        font-size: 18px;
-        font-weight: 500;
-      }
-      a {
-        font-weight: 600;
-        color: theme(colors.blue.600);
-      }
-      ul {
-        padding-left: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-      li {
-        list-style-type: disc;
-      }
-      li::marker {
-        color: theme(colors.blue.600);
-      }
-    </style>
   </head>
 
-  <body class="font-montserrat text-slate-800 bg-white">
+  <Body>
     <header class="relative pt-88 w-full mb-64">
       <Container classes="relative z-10">
         <span class="font-semibold text-48 mb-24 block text-pink-400"
@@ -104,5 +69,5 @@ const {
       </article>
     </Container>
     <Footer />
-  </body>
-</html>
+  </Body>
+</Shell>

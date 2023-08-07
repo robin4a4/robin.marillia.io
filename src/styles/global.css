@@ -22,3 +22,41 @@ blockquote {
 	margin: 0px;
 	font-style: italic;
 }
+
+@layer base {
+	h2 {
+	margin-top: 64px;
+	margin-bottom: 32px;
+	font-weight: 600;
+	font-size: 24px;
+	color: theme(colors.blue.600);
+	}
+	h3 {
+	margin-top: 24px;
+	margin-bottom: 16px;
+	font-weight: 600;
+	font-size: 20px;
+	}
+	p,
+	ul {
+	margin-bottom: 18px;
+	font-size: 18px;
+	font-weight: 500;
+	}
+	a {
+	font-weight: 600;
+	color: theme(colors.blue.600);
+	}
+	ul {
+	padding-left: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	}
+	li {
+	list-style-type: disc;
+	}
+	li::marker {
+	color: theme(colors.blue.600);
+	}
+}
