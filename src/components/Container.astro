@@ -1,11 +1,16 @@
 ---
 export interface Props {
-	classes?: string;
+  classes?: string;
 }
 
-const {classes} = Astro.props
+const { classes } = Astro.props;
 ---
 
-<section class:list={['container mx-auto px-16 md:px-[124px]', classes]}>
-    <slot/>
+<section
+  class:list={[
+    "mx-auto px-16 w-full sm:px-32 lg:container lg:px-[138px]",
+    classes,
+  ]}
+>
+  <slot />
 </section>

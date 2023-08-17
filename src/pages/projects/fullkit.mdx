@@ -9,13 +9,13 @@ order: 2
 pubDate: "Feb 2023"
 ---
 
-Following the experiment of creating [jSimple](/projects/jsimple) I wanted to go further and create a fullstack framework. I wanted to create something that would be easy to use and that would be a good alternative to the current frameworks. The excuse was to rewrite my project [Techwatch](/projects/techwatch) from SvelteKit to my own janky framework (great idea!).
+Following the experiment of creating [jSimple](/projects/jsimple) I wanted to go further and create a fullstack framework. I wanted to create something that would be easy to use and that would be a good alternative to the current frameworks to build small website. The excuse was to rewrite my project [Techwatch](/projects/techwatch) from SvelteKit to my own janky framework (great idea!).
 
 ## Philosophy
 
 Similar to class based view in Django, Fullkit uses classes to define views and layouts. It is not as flexible as Django because the inheritance story is not great in javascript but you can inherit from either the `View` class or the `Layout` class. You then define an HTML template that will be rendered by the server.
 
-There are some addition to standard HTML like the `include` tag that allows you to include another template and the `for` tag that allows you to loop over an array. Just like Django, to get the data from the View to the template you use the `getContextData()` method.
+There are some addition to standard HTML like the `include` tag that allows you to include another template and the `for` tag that allows you to loop over an array. These are done using my compile-include-html package. Just like Django, to get the data from the View to the template you use the `getContextData()` method.
 
 ## Get started
 

@@ -6,7 +6,7 @@ import ProjectCard from "../components/ProjectCard.astro";
 import ArticleCard from "../components/ArticleCard.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 import Container from "../components/Container.astro";
-import Carousel from "../components/Carousel.astro";
+import CardGrid from "../components/CardGrid.astro";
 import Shell from "../layouts/shell.astro";
 import Body from "../layouts/body.astro";
 
@@ -27,22 +27,22 @@ const projects = (await Astro.glob("./projects/*.{md,mdx}")).sort(
   <Body>
     <Header />
     <Container classes="flex flex-col gap-32 pt-64">
-      <Carousel itemNumber={projects.length}>
+      <CardGrid itemNumber={projects.length}>
         {
           projects.map((project) => (
             <ProjectCard url={project.url} project={project.frontmatter} />
           ))
         }
-      </Carousel>
+      </CardGrid>
       <section class="flex flex-col gap-24 mb-64">
         <h2 class="font-bold text-32 text-slate-900">Last articles</h2>
-        <Carousel itemNumber={posts.length}>
+        <CardGrid itemNumber={posts.length}>
           {
             posts.map((post) => (
               <ArticleCard url={post.url} post={post.frontmatter} />
             ))
           }
-        </Carousel>
+        </CardGrid>
       </section>
     </Container>
     <Footer />
