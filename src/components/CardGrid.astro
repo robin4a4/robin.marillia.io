@@ -34,15 +34,7 @@ const { itemNumber } = Astro.props;
         backgroundColor: "#e2e8f0",
       },
       {
-        scale: 1.1,
-        backgroundColor: "#f472b6",
-      },
-      {
         scale: 1.3,
-        backgroundColor: "#f472b6",
-      },
-      {
-        scale: 1.1,
         backgroundColor: "#f472b6",
       },
       {
@@ -50,17 +42,6 @@ const { itemNumber } = Astro.props;
         backgroundColor: "#e2e8f0",
       },
     ];
-
-    getKeyframes(currentItem: number, slideNumber: number) {
-      return [...Array(slideNumber)].map((_, index) => {
-        const scale = currentItem === index ? 1.3 : 1;
-        const backgroundColor = currentItem === index ? "#f472b6" : "#e2e8f0";
-        return {
-          scale,
-          backgroundColor,
-        };
-      });
-    }
 
     connectedCallback() {
       const slidesContainer = this.querySelector(
@@ -70,13 +51,15 @@ const { itemNumber } = Astro.props;
         "[data-slide-dot]"
       ) as NodeListOf<HTMLDivElement>;
       slideDots.forEach((dot, index) => {
-        dot.animate(this.getKeyframes(index, slideDots.length), {
+        dot.animate(this.keyframes, {
           fill: "both",
           // @ts-ignore
-          timeline: new ScrollTimeline({
-            source: slidesContainer,
+          timeline: new ViewTimeline({
+            subject: slidesContainer.children[index],
             axis: "inline",
           }),
+          rangeStart: "cover",
+          rangeEnd: "cover",
         });
       });
     }
