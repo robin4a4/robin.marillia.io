@@ -8,6 +8,7 @@ const { itemNumber } = Astro.props;
 <carousel-component>
   <ul
     data-slides-container
+    transition:persist
     class="max-md:-mx-16 max-md:px-16 max-md:pb-16 max-md:flex max-md:flex-row max-md:overflow-x-auto max-md:flex-no-wrap snap-mandatory snap-x sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-x-24 gap-y-32"
   >
     <slot />

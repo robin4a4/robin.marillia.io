@@ -6,15 +6,73 @@ pubDate: "Aug 07 2023"
 heroImage: "/placeholder-hero.jpg"
 ---
 
-Using the future scroll timeline API, we will create a reusable carousel custom element that should be usable with any framework. This article will show you multiple ways to create a carousel custom element.
+Using the future scroll timeline API, we will create a reusable carousel custom element that should be usable with any framework. This article will show you multiple ways to create a carousel custom element, from vanilla javascript to reusable astro component and react integration.
 
-## The main idea
+## No javascript needed, modern CSS is cool
 
 The future scroll timeline API is a new API that allows us to create scroll-based animations. It is currently only supported in Chrome and Edge, but it is usable via [this up-to-date polyfill](https://github.com/flackr/scroll-timeline)
 
-There are two APIs, the CSS API and the JS API, both are supported in the polyfill.
+There are two APIs, the CSS API and the JS API, both are supported in the polyfill. With this futur css feature and combined with the already existing scroll snapping directives we are able to create a fully functional carousel without any JS.
 
-## Final result using Astro
+We will only add javascript at the end to create clickable thumbnails under the carousel.
+
+## The basic sliding mechanism
+
+The base for our carousel will be a section containing an html list of items, and a div containing corresponding dots indicators:
+
+```html
+<section class="carousel">
+  <ul class="slides-container">
+    <li class="slide">slide 1</li>
+    <li class="slide">slide 2</li>
+    <li class="slide">slide 2</li>
+  </ul>
+  <div class="dots-container">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</section>
+```
+
+For the css we will rely heavily on the `overflow-x`, `scroll-snap-type` and `scroll-snap-align` css properties.
+
+```css
+.carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.slides-container {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.slide {
+  width: 100px;
+  height: 200px;
+  scroll-snap-align: start;
+}
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+}
+```
+
+And that is all for the sliding behaviors ! Now let's see how we can add the current slide indicator by coloring the corresponding dots.
+
+## The `ViewTimeline` magic
+
+## Astro implementation using the javascript Web animation API
 
 ```javascript
 ---
@@ -53,15 +111,7 @@ const { itemNumber } = Astro.props;
         backgroundColor: "#e2e8f0",
       },
       {
-        scale: 1.1,
-        backgroundColor: "#f472b6",
-      },
-      {
         scale: 1.3,
-        backgroundColor: "#f472b6",
-      },
-      {
-        scale: 1.1,
         backgroundColor: "#f472b6",
       },
       {
@@ -84,6 +134,8 @@ const { itemNumber } = Astro.props;
             subject: slidesContainer.children[index],
             axis: "inline",
           }),
+          rangeStart: 'cover'
+          rangeSEnd: 'cover'
         });
       });
     }
