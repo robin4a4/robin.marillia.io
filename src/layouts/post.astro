@@ -13,11 +13,14 @@ export interface Props {
     pubDate?: string;
     updatedDate?: string;
     heroImage?: string;
+    order?: number;
   };
+  index: number;
 }
 
 const {
-  content: { title, description, pubDate, updatedDate, heroImage },
+  content: { title, description, pubDate, updatedDate, heroImage, order },
+  index,
 } = Astro.props;
 ---
 
@@ -36,7 +39,10 @@ const {
           class="md:px-112 pt-32 mt-32 md:pt-64 md:mt-64 border-t border-slate-200 flex flex-col gap-32"
         >
           <Link href="../" toLeft>Back to home</Link>
-          <h1 class="font-semibold text-48 max-w-[90%] leading-tight">
+          <h1
+            class="font-semibold text-48 max-w-[90%] leading-tight"
+            transition:name={`title-${order}`}
+          >
             {title}
           </h1>
           <div class="text-slate-400 font-semibold">

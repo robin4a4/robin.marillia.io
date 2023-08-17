@@ -7,4 +7,7 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://robin.marillia.io",
   integrations: [mdx(), sitemap()],
+  experimental: {
+    viewTransitions: true,
+  },
 });
