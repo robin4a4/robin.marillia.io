@@ -1,18 +1,49 @@
 ---
 export interface Props {
-    href: string,
-    toLeft?: boolean,
-    hasAbsoluteInset?: boolean
+  href: string;
+  toLeft?: boolean;
+  hasAbsoluteInset?: boolean;
+  tint?: "pink" | "blue";
 }
-const {href, toLeft, hasAbsoluteInset} = Astro.props
+const { href, toLeft, hasAbsoluteInset, tint } = Astro.props;
+const textColor = tint === "pink" ? "text-pink-600" : "text-blue-600";
 ---
-<a href={href} class='group flex gap-16 items-center'>
-    {!toLeft && <span class="text-22 font-semibold text-blue-600"><slot/></span>}
-    <div class:list={["flex flex-col rounded-full border border-slate-300 grid place-content-center p-12 transition", toLeft ? 'group-hover:-translate-x-4' : 'group-hover:translate-x-4', {'rotate-180': toLeft}]}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="transition w-24 h-24 group-hover:translate-x-4">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-        </svg>  
-    </div>
-    {toLeft && <span class="text-22 font-semibold text-blue-600"><slot/></span>}
-    {hasAbsoluteInset && <div class="absolute inset-0"></div>}
+
+<a href={href} class="group flex gap-16 items-center">
+  {
+    !toLeft && (
+      <span class:list={["text-22 font-semibold", textColor]}>
+        <slot />
+      </span>
+    )
+  }
+  <div
+    class:list={[
+      "flex flex-col rounded-full border border-slate-300 grid place-content-center p-12 transition",
+      toLeft ? "group-hover:-translate-x-4" : "group-hover:translate-x-4",
+      { "rotate-180": toLeft },
+    ]}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class:list={["transition w-24 h-24 group-hover:translate-x-4", textColor]}
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+    </svg>
+  </div>
+  {
+    toLeft && (
+      <span class:list={["text-22 font-semibold", textColor]}>
+        <slot />
+      </span>
+    )
+  }
+  {hasAbsoluteInset && <div class="absolute inset-0" />}
 </a>
