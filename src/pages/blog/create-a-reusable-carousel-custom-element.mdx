@@ -3,8 +3,11 @@ layout: "../../layouts/post.astro"
 title: "Create a reusable carousel custom element"
 description: "Use the future scroll timeline API and learn multiple ways to create a reusable carousel custom element."
 pubDate: "Aug 07 2023"
-heroImage: "/placeholder-hero.jpg"
 ---
+
+import CarouselExample from "./components/CarouselExample.astro";
+
+<CarouselExample />
 
 Using the future scroll timeline API, we will create a reusable carousel custom element that should be usable with any framework. This article will show you multiple ways to create a carousel custom element, from vanilla javascript to reusable astro component and react integration.
 
@@ -42,17 +45,25 @@ For the css we will rely heavily on the `overflow-x`, `scroll-snap-type` and `sc
   display: flex;
   flex-direction: column;
   gap: 16px;
+  max-width: 100px;
 }
 
 .slides-container {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  display: flex;
+  gap: 16px;
 }
 
 .slide {
-  width: 100px;
+  min-width: 100px;
   height: 200px;
   scroll-snap-align: start;
+  list-style: none;
+  background: #ededed;
+  border-radius: 16px;
+  display: grid;
+  place-content: center;
 }
 
 .dots-container {
@@ -65,12 +76,57 @@ For the css we will rely heavily on the `overflow-x`, `scroll-snap-type` and `sc
   width: 12px;
   height: 12px;
   border-radius: 9999px;
+  background-color: cyan;
 }
 ```
 
 And that is all for the sliding behaviors ! Now let's see how we can add the current slide indicator by coloring the corresponding dots.
 
 ## The `ViewTimeline` magic
+
+### Animate slides on scroll
+
+First let's see how we can play with the view timelines to animates our slides on horizontal scroll. Start by adding the following line to the `.slide` css class:
+
+```css
+ {
+  view-timeline: --carousel x;
+}
+```
+
+This will create a "view" timeline named `--carousel` following the x axis. Then we tell our slides to use the --carousel timeline for their animations by adding this line:
+
+```css
+ {
+  animation-timeline: --carousel;
+}
+```
+
+Finally we can use any animations we want on our slides, for example here with `fade-in-out-animation` which fade from opacity 0 to 1 and back to 0:
+
+```css
+ {
+  animation: linear fade-in-out-animation;
+}
+```
+
+It give us the following final slide class:
+
+```css
+.slide {
+  min-width: 100px;
+  height: 200px;
+  scroll-snap-align: start;
+  list-style: none;
+  background: #ededed;
+  border-radius: 16px;
+  display: grid;
+  place-content: center;
+  view-timeline: --carousel x;
+  animation-timeline: --carousel;
+  animation: linear fade-in-out-animation;
+}
+```
 
 ## Astro implementation using the javascript Web animation API
 
