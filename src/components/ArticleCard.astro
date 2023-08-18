@@ -11,17 +11,42 @@ const { post, url } = Astro.props;
 
 <li
   class:list={[
-    "snap-center max-md:min-w-[348px] relative flex items-center justify-between gap-24 px-24 py-32 md:p-32 bg-slate-100 rounded-xl hover:scale-[1.015] group transition list-style-none",
+    "snap-center max-md:min-w-[348px] relative flex items-center justify-between gap-24 px-24 py-32 md:p-32 bg-slate-100 rounded-xl group transition list-style-none",
+    !post.isSoon && "hover:scale-[1.015]",
   ]}
 >
-  <div class="flex flex-col justify-between gap-16 flex-1">
+  <div
+    class:list={[
+      "flex flex-col justify-between gap-16 flex-1",
+      post.isSoon && "opacity-40",
+    ]}
+  >
     <div class="flex flex-col gap-32">
       <p class="text-32 font-bold text-pink-400">{post.title}</p>
       <p class="text-18 font-medium text-slate-500">{post.description}</p>
-      <p class="text-24 font-medium text-slate-400">
-        June 5th, 2022 — 5 min read
-      </p>
+      {
+        !post.isSoon && (
+          <p class="text-24 font-medium text-slate-400">
+            {post.pubDate} — {post.readingDuration} read
+          </p>
+        )
+      }
     </div>
-    <Link href={url} hasAbsoluteInset>Learn more</Link>
+    {
+      !post.isSoon && (
+        <Link href={url} hasAbsoluteInset>
+          Learn more
+        </Link>
+      )
+    }
   </div>
+  {
+    post.isSoon && (
+      <div class="absolute inset-0 flex justify-end p-16 items-start">
+        <span class="rounded-full px-64 py-16 bg-blue-100 text-blue-600 uppercase text-14 tracking-wider font-bold">
+          Soon !
+        </span>
+      </div>
+    )
+  }
 </li>
