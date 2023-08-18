@@ -1,0 +1,74 @@
+---
+import InteractiveExample from "../../../components/InteractiveExample.astro";
+---
+
+<style>
+  @keyframes fade-in-out-animation {
+    entry 0%,
+    exit 100% {
+      opacity: 0;
+      background: red;
+    }
+    entry 100%,
+    exit 0% {
+      opacity: 1;
+      background: green;
+    }
+  }
+
+  .carousel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 300px;
+  }
+
+  .slides-container {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 16px;
+  }
+
+  @media screen and (max-width: 640px) {
+    .slides-container {
+      -ms-overflow-style: none; /* for Internet Explorer, Edge */
+      scrollbar-width: none; /* for Firefox */
+    }
+    .slides-container::-webkit-scrollbar {
+      display: none; /* for Chrome, Safari, and Opera */
+    }
+  }
+
+  .slide {
+    min-width: 300px;
+    height: 300px;
+    scroll-snap-align: start;
+    list-style: none;
+    background: theme(colors.slate.100);
+    border-radius: 16px;
+    display: grid;
+    place-content: center;
+
+    view-timeline: --carousel x;
+    animation-timeline: --carousel;
+    animation: linear fade-in-out-animation;
+  }
+</style>
+<InteractiveExample>
+  <carousel-component>
+    <section class="carousel">
+      <ul class="slides-container">
+        <li class="slide">slide 1</li>
+        <li class="slide">slide 2</li>
+        <li class="slide">slide 2</li>
+      </ul>
+    </section>
+  </carousel-component>
+</InteractiveExample>
+
+<script>
+  import "https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js";
+</script>

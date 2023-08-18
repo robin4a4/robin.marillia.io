@@ -1,0 +1,49 @@
+---
+export interface Props {
+  range?: "cover" | "contain";
+}
+const { range } = Astro.props;
+---
+
+<carousel-component data-range={range}><slot /></carousel-component>
+<script>
+  class CarouselComponent extends HTMLElement {
+    keyframes = [
+      {
+        scale: 1,
+        backgroundColor: "#e2e8f0",
+      },
+      {
+        scale: 1.3,
+        backgroundColor: "#f472b6",
+      },
+      {
+        scale: 1,
+        backgroundColor: "#e2e8f0",
+      },
+    ];
+
+    connectedCallback() {
+      const range = this.dataset.range;
+      const slidesContainer = this.querySelector(
+        "[data-slides-container]"
+      ) as HTMLDivElement;
+      const dotsContainer = this.querySelector(
+        "[data-dots-container]"
+      ) as HTMLDivElement;
+      [...dotsContainer.children].forEach((dot, index) => {
+        dot.animate(this.keyframes, {
+          fill: "both",
+          // @ts-ignore
+          timeline: new ViewTimeline({
+            subject: slidesContainer.children[index],
+            axis: "inline",
+          }),
+          rangeStart: range === "contain" ? "contain 0%" : "cover",
+          rangeEnd: range === "contain" ? "contain 100%" : "cover",
+        });
+      });
+    }
+  }
+  customElements.define("carousel-component", CarouselComponent);
+</script>

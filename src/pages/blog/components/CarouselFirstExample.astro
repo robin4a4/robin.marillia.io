@@ -1,0 +1,87 @@
+---
+import InteractiveExample from "../../../components/InteractiveExample.astro";
+import CarouselCustomElement from "./CarouselCustomElement.astro";
+---
+
+<style>
+  .carousel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 300px;
+  }
+
+  .slides-container {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 16px;
+  }
+
+  @media screen and (max-width: 640px) {
+    .slides-container {
+      -ms-overflow-style: none; /* for Internet Explorer, Edge */
+      scrollbar-width: none; /* for Firefox */
+    }
+    .slides-container::-webkit-scrollbar {
+      display: none; /* for Chrome, Safari, and Opera */
+    }
+  }
+
+  .slide {
+    min-width: 300px;
+    height: 300px;
+    scroll-snap-align: start;
+    list-style: none;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .dots-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    background-color: cyan;
+  }
+</style>
+<InteractiveExample>
+  <CarouselCustomElement>
+    <section class="carousel">
+      <ul class="slides-container" data-slides-container>
+        <li class="slide">
+          <img
+            src="https://images.unsplash.com/photo-1609155627149-8c6b32d4e222?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3870&q=80"
+          />
+        </li>
+        <li class="slide">
+          <img
+            src="https://images.unsplash.com/photo-1521405785232-7a56b029191e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3876&q=80"
+          />
+        </li>
+        <li class="slide">
+          <img
+            src="https://images.unsplash.com/photo-1608736860980-99395eee98fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2728&q=80"
+          />
+        </li>
+      </ul>
+      <div class="dots-container" data-dots-container>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </section>
+  </CarouselCustomElement>
+</InteractiveExample>
