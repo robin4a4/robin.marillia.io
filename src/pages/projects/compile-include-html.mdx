@@ -2,9 +2,191 @@
 layout: "../../layouts/post.astro"
 title: "compile-include-html package"
 description: "Creating a compiler to parse <include> and <for> html tags"
-heroImage: "/fullkit.png"
 topics: ["project", "code"]
 largeCard: false
 order: 3
 pubDate: "Jan 2023"
 ---
+
+At the beginning of 2023, I became really interested in compilers and parsers. I also wanted to build a site with the minimum of javascript and libraries but wanted the modularity of templating languages instead of one big HTML file.
+
+I decided to start to create a small compiler that would parse a few custom HTML tags. I created a package called `compile-include-html` that would parse `<include>` and `<for>` tags.
+
+```html
+<!-- main.html -->
+
+<div class="container">
+  <include src="card.html" with="text: hello world" />
+</div>
+```
+
+```html
+<!-- card.html -->
+
+<div class="card">{text}</div>
+```
+
+```html
+<!-- main.html after compilation -->
+
+<div class="container">
+  <div class="card">hello world</div>
+</div>
+```
+
+## The process
+
+All my previous projects where user facing experiments where I could run `npm run dev` in local and it would launch a server with hot reloading. This time, it was a package for other devs to use so I had to:
+
+- learn how to develop a package in dev: how to test the changes in local
+- learn how to publish a package on npm
+
+### Development
+
+For this project I used test driven development. It was the first time that I used it and I really liked it. Before adding a feature, I just had to add a failing test and then make it pass.
+
+I used [Vitest](https://vitest.dev/) as a testing framework.
+
+Because the package searches for files in different folders I also created some real examples to test that the imports where working correctly in a more real world environment.
+
+### Publishing
+
+To publish my package I automated the process using [Changeset](https://github.com/changesets/changesets) and github actions.
+
+Every time I run `pnpm run release`, It builds the code, creates a new release in the changelog and publishes the package on npm if the CI passed. All that in 30 lines of code thanks to Changeset.
+
+## The package
+
+### Installation
+
+```
+npm i compile-include-html
+```
+
+### Simple for loop example
+
+```typescript
+// javascript file where the context is defined
+import { HtmlParser } from "compile-include-html";
+const source = `
+<div class="container">
+    <for condition="const user of array">
+        <span>Firstname: {user.firstName}, lastname: {user.lastName}</span>
+    </for>
+</div>`;
+
+const context = {
+  array: [
+    { firstName: "john", lastName: "doe" },
+    { firstName: "jannet", lastName: "foe" },
+  ],
+};
+const htmlParser = new HtmlParser({
+  globalContext: context,
+});
+const output = htmlParser.transform(source);
+```
+
+```html
+<!-- output -->
+<div class="container">
+  <span>Firstname: john, lastname: doe</span>
+  <span>Firstname: jannet, lastname: foe</span>
+</div>
+```
+
+### Context replacement
+
+```typescript
+// javascript file where the context is defined
+import { HtmlParser } from "compile-include-html";
+const source = `<a href="{link.href}">{link.name}</a>`;
+
+const parser = new HtmlParser({
+  globalContext: {
+    link: {
+      href: "https://example.com",
+      name: "link to example",
+    },
+  },
+});
+const output = htmlParser.transform(source);
+```
+
+```html
+<!-- output -->
+<a href="https://example.com">link to example</a>
+```
+
+### Usage
+
+Create a new HtmlParser with:
+
+```typescript
+import { HtmlParser } from "compile-include-html";
+const htmlParser = new HtmlParser();
+```
+
+#### Options
+
+You can pass an option object to your parser.
+
+```typescript
+type options = {
+  indent?: number;
+  inputIsDocument?: boolean;
+  globalContext?: TContext;
+  basePath?: string;
+};
+```
+
+- `indent`: You can set the indentation of your generated html with the `indent` property.
+- `inputIsDocument`: determines whether the input is an entire document with `<DOCTYPE>`, `<head>` and `<body>` tags or just a fragment. It will allow the parser to correctly manage both cases.
+- `globalContext`: allows you to pass a context object to the parser. It will be used to replace values wrapped in `{` and `}`. Brackets values only work on attributes values and text nodes, for example:
+
+```html
+<!-- will work -->
+<p class="{className}">{paragraph}</p>
+
+<!-- will not work -->
+<p {classAttr}="px-4">{paragraph}</p>
+```
+
+- `basePath`: allows you to pass a basePath to your parser, for example you can do
+
+```typescript
+import { HtmlParser } from "compile-include-html";
+const htmlParser = new HtmlParser({ basePath: "pages/about" });
+```
+
+```html
+<!-- main.html -->
+
+<div class="container">
+  <include src="card.html" with="text: hello world" />
+</div>
+```
+
+instead of
+
+```html
+<!-- main.html -->
+
+<div class="container">
+  <include src="pages/about/card.html" with="text: hello world" />
+</div>
+```
+
+#### Methods
+
+##### `readFile(path: string): string`
+
+Use it to read a file and retrieve a string of the file's content.
+
+##### `transform(source: string): string`
+
+Use it to transform a string using the include or for tag into its compiled version.
+
+##### `outputNewFile(inputPath: string, outputPath: string): void`
+
+Use it to compile an input file located at `inputPath` and create an output file located at `outputPath`.
