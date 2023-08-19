@@ -130,9 +130,8 @@ It give us the following final slide class:
 }
 ```
 
-Unfortunately, for now, the polyfill prevents us to animate other elements than the element on which we set the `view-timeline` property (we need the `timeline-scope` property which is not currently supported in the polyfill, see [https://github.com/flackr/scroll-timeline/issues/123](https://github.com/flackr/scroll-timeline/issues/123). So we will have to use a little bit of javascript to animate our dots.
-
-{/* <CarouselSlideAnimationExample /> */}
+Unfortunately, for now, the polyfill prevents us to animate other elements than the element on which we set the `view-timeline` property (we need the `timeline-scope` property which is not currently supported in the polyfill, see [https://github.com/flackr/scroll-timeline/issues/123](https://github.com/flackr/scroll-timeline/issues/123)).
+So we will have to use a little bit of javascript to animate our dots.
 
 ### Animate dots on scroll
 
@@ -171,7 +170,7 @@ const keyframes = [
 
 const slidesContainer = document.querySelector("[data-slides-container]");
 const dotsContainer = document.querySelector("[data-dots-container]");
-dotsContainer.children.forEach((dot, index) => {
+[...dotsContainer.children].forEach((dot, index) => {
   dot.animate(keyframes, {
     fill: "both",
     timeline: new ViewTimeline({
