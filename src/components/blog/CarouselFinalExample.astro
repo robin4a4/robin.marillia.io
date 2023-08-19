@@ -1,21 +1,9 @@
 ---
-import InteractiveExample from "../../../components/InteractiveExample.astro";
+import InteractiveExample from "../InteractiveExample.astro";
+import CarouselCustomElement from "./CarouselCustomElement.astro";
 ---
 
 <style>
-  @keyframes fade-in-out-animation {
-    entry 0%,
-    exit 100% {
-      opacity: 0;
-      background: red;
-    }
-    entry 100%,
-    exit 0% {
-      opacity: 1;
-      background: green;
-    }
-  }
-
   .carousel {
     display: flex;
     flex-direction: column;
@@ -51,24 +39,34 @@ import InteractiveExample from "../../../components/InteractiveExample.astro";
     border-radius: 16px;
     display: grid;
     place-content: center;
+  }
 
-    view-timeline: --carousel x;
-    animation-timeline: --carousel;
-    animation: linear fade-in-out-animation;
+  .dots-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    background-color: cyan;
   }
 </style>
 <InteractiveExample>
-  <carousel-component>
+  <CarouselCustomElement>
     <section class="carousel">
-      <ul class="slides-container">
+      <ul class="slides-container" data-slides-container>
         <li class="slide">slide 1</li>
         <li class="slide">slide 2</li>
-        <li class="slide">slide 2</li>
+        <li class="slide">slide 3</li>
       </ul>
+      <div class="dots-container" data-dots-container>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
     </section>
-  </carousel-component>
+  </CarouselCustomElement>
 </InteractiveExample>
-
-<script>
-  import "https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js";
-</script>
