@@ -1,0 +1,72 @@
+---
+export interface Props {
+  range?: "cover" | "contain";
+}
+const { range } = Astro.props;
+---
+
+<carousel-component-example data-range={range}
+  ><slot /></carousel-component-example
+>
+<script>
+  class CarouselComponent extends HTMLElement {
+    keyframes = [
+      {
+        borderColor: "#e2e8f0",
+      },
+      {
+        borderColor: "#f472b6",
+      },
+      {
+        borderColor: "#e2e8f0",
+      },
+    ];
+
+    connectedCallback() {
+      const range = this.dataset.range;
+      const slidesContainer = this.querySelector(
+        "[data-slides-container]"
+      ) as HTMLDivElement;
+      const thumnailsContainer = this.querySelector(
+        "[data-thumnails-container]"
+      ) as HTMLDivElement;
+      [...thumnailsContainer.children].forEach((dot, index) => {
+        const button = dot.querySelector("button") as HTMLButtonElement;
+        button.animate(this.keyframes, {
+          fill: "both",
+          // @ts-ignore
+          timeline: new ViewTimeline({
+            subject: slidesContainer.children[index],
+            axis: "inline",
+          }),
+          rangeStart: range === "contain" ? "contain 0%" : "cover",
+          rangeEnd: range === "contain" ? "contain 100%" : "cover",
+        });
+
+        button.addEventListener("click", () => {
+          slidesContainer.children[index].scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "start",
+          });
+        });
+      });
+    }
+
+    // animateOnScroll(button) {
+    //   const range = this.dataset.range;
+    //   button.animate(this.keyframes, {
+    //       fill: "both",
+    //       // @ts-ignore
+    //       timeline: new ViewTimeline({
+    //         subject: slidesContainer.children[index],
+    //         axis: "inline",
+    //       }),
+    //       rangeStart: range === "contain" ? "contain 0%" : "cover",
+    //       rangeEnd: range === "contain" ? "contain 100%" : "cover",
+    //     });
+    // }
+  }
+  if (customElements.get("carousel-component-example") === undefined)
+    customElements.define("carousel-component-example", CarouselComponent);
+</script>

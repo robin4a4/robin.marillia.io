@@ -70,16 +70,3 @@ blockquote {
       display: none; /* for Chrome, Safari, and Opera */
     }
   }
-
-  @keyframes fade-in-out-animation {
-    entry 0%,
-    exit 100% {
-      opacity: 0;
-      background: red;
-    }
-    entry 100%,
-    exit 0% {
-      opacity: 1;
-      background: green;
-    }
-  }
