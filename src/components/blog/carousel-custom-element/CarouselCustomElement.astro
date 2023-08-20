@@ -25,49 +25,66 @@ const { range } = Astro.props;
     ];
 
     connectedCallback() {
-      const range = this.dataset.range;
       const slidesContainer = this.querySelector(
         "[data-slides-container]"
       ) as HTMLDivElement;
+
       const thumnailsContainer = this.querySelector(
         "[data-thumnails-container]"
       ) as HTMLDivElement;
-      [...thumnailsContainer.children].forEach((dot, index) => {
-        const button = dot.querySelector("button") as HTMLButtonElement;
-        button.animate(this.keyframes, {
-          fill: "both",
-          // @ts-ignore
-          timeline: new ViewTimeline({
-            subject: slidesContainer.children[index],
-            axis: "inline",
-          }),
-          rangeStart: range === "contain" ? "contain 0%" : "cover",
-          rangeEnd: range === "contain" ? "contain 100%" : "cover",
-        });
 
-        button.addEventListener("click", () => {
-          slidesContainer.children[index].scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "start",
-          });
+      [...thumnailsContainer.children].forEach((dot, index) => {
+        const correspondingSlide = slidesContainer.children[index];
+        const button = dot.querySelector("button") as HTMLButtonElement;
+
+        this.animateOnScroll(button, correspondingSlide);
+
+        this.scrollOnThumbnailClick(button, correspondingSlide);
+      });
+      this.scrollOnControlClick(slidesContainer);
+    }
+
+    animateOnScroll(button, correspondingSlide) {
+      const range = this.dataset.range;
+      button.animate(this.keyframes, {
+        fill: "both",
+        // @ts-ignore
+        timeline: new ViewTimeline({
+          subject: correspondingSlide,
+          axis: "inline",
+        }),
+        rangeStart: range === "contain" ? "contain 0%" : "cover",
+        rangeEnd: range === "contain" ? "contain 100%" : "cover",
+      });
+    }
+
+    scrollOnThumbnailClick(button, correspondingSlide) {
+      button.addEventListener("click", () => {
+        correspondingSlide.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "start",
         });
       });
     }
 
-    // animateOnScroll(button) {
-    //   const range = this.dataset.range;
-    //   button.animate(this.keyframes, {
-    //       fill: "both",
-    //       // @ts-ignore
-    //       timeline: new ViewTimeline({
-    //         subject: slidesContainer.children[index],
-    //         axis: "inline",
-    //       }),
-    //       rangeStart: range === "contain" ? "contain 0%" : "cover",
-    //       rangeEnd: range === "contain" ? "contain 100%" : "cover",
-    //     });
-    // }
+    scrollOnControlClick(slidesContainer) {
+      const prevControl = this.querySelector(
+        "[data-control='prev']"
+      ) as HTMLButtonElement;
+      const nextControl = this.querySelector(
+        "[data-control='next']"
+      ) as HTMLButtonElement;
+
+      prevControl.addEventListener("click", () => {
+        slidesContainer.scroll(-1, 0);
+      });
+
+      nextControl.addEventListener("click", () => {
+        console.log("next");
+        slidesContainer.scroll(1, 0);
+      });
+    }
   }
   if (customElements.get("custom-carousel-component-example") === undefined)
     customElements.define(
