@@ -71,47 +71,79 @@ import CarouselCustomElement from "./CarouselCustomElement.astro";
 </style>
 <InteractiveExample>
   <CarouselCustomElement>
-    <section class="carousel">
-      <ul class="slides-container" data-slides-container>
-        <li class="slide">
-          <img
-            src="https://images.unsplash.com/photo-1609155627149-8c6b32d4e222?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3870&q=80"
-          />
-        </li>
-        <li class="slide">
-          <img
-            src="https://images.unsplash.com/photo-1521405785232-7a56b029191e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3876&q=80"
-          />
-        </li>
-        <li class="slide">
-          <img
-            src="https://images.unsplash.com/photo-1608736860980-99395eee98fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2728&q=80"
-          />
-        </li>
-      </ul>
-      <ul class="thumnails-container" data-thumnails-container>
-        <li class="thumnail">
-          <button type="button">
+    <div class="flex items-center gap-16">
+      <button type="button" data-control="prev">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-24 h-24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"></path>
+        </svg>
+      </button>
+      <section class="carousel">
+        <ul class="slides-container" data-slides-container>
+          <li class="slide">
             <img
               src="https://images.unsplash.com/photo-1609155627149-8c6b32d4e222?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3870&q=80"
             />
-          </button>
-        </li>
-        <li class="thumnail">
-          <button type="button">
+          </li>
+          <li class="slide">
             <img
               src="https://images.unsplash.com/photo-1521405785232-7a56b029191e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3876&q=80"
             />
-          </button>
-        </li>
-        <li class="thumnail">
-          <button type="button">
+          </li>
+          <li class="slide">
             <img
               src="https://images.unsplash.com/photo-1608736860980-99395eee98fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2728&q=80"
             />
-          </button>
-        </li>
-      </ul>
-    </section>
+          </li>
+        </ul>
+        <ul class="thumnails-container" data-thumnails-container>
+          <li class="thumnail">
+            <button type="button">
+              <img
+                src="https://images.unsplash.com/photo-1609155627149-8c6b32d4e222?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3870&q=80"
+              />
+            </button>
+          </li>
+          <li class="thumnail">
+            <button type="button">
+              <img
+                src="https://images.unsplash.com/photo-1521405785232-7a56b029191e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3876&q=80"
+              />
+            </button>
+          </li>
+          <li class="thumnail">
+            <button type="button">
+              <img
+                src="https://images.unsplash.com/photo-1608736860980-99395eee98fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2728&q=80"
+              />
+            </button>
+          </li>
+        </ul>
+      </section>
+      <button type="button" data-control="next"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-24 h-24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"></path>
+        </svg>
+      </button>
+    </div>
   </CarouselCustomElement>
 </InteractiveExample>

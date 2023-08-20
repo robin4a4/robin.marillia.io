@@ -9,6 +9,8 @@ const { range } = Astro.props;
   ><slot /></swippable-carousel-component-example
 >
 <script>
+  import "https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js";
+
   class CarouselComponent extends HTMLElement {
     keyframes = [
       {
