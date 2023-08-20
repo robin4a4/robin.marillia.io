@@ -5,8 +5,8 @@ export interface Props {
 const { range } = Astro.props;
 ---
 
-<carousel-component-example data-range={range}
-  ><slot /></carousel-component-example
+<swippable-carousel-component-example data-range={range}
+  ><slot /></swippable-carousel-component-example
 >
 <script>
   class CarouselComponent extends HTMLElement {
@@ -47,6 +47,9 @@ const { range } = Astro.props;
       });
     }
   }
-  if (customElements.get("carousel-component-example") === undefined)
-    customElements.define("carousel-component-example", CarouselComponent);
+  if (customElements.get("swippable-carousel-component-example") === undefined)
+    customElements.define(
+      "swippable-carousel-component-example",
+      CarouselComponent
+    );
 </script>
