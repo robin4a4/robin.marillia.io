@@ -21,6 +21,7 @@ const textColor = tint === "pink" ? "text-pink-600" : "text-blue-600";
     class:list={[
       "flex flex-col rounded-full border border-slate-300 grid place-content-center p-12 transition",
       toLeft ? "group-hover:-translate-x-4" : "group-hover:translate-x-4",
+      tint === "pink" ? "border-pink-300" : "border-slate-300",
       { "rotate-180": toLeft },
     ]}
   >
