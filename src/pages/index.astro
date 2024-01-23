@@ -1,4 +1,5 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -10,13 +11,9 @@ import CardGrid from "../components/CardGrid.astro";
 import Shell from "../layouts/shell.astro";
 import Body from "../layouts/body.astro";
 
-const posts = (await Astro.glob("./blog/*.{md,mdx}")).sort(
-  (a, b) =>
-    new Date(b.frontmatter.pubDate).valueOf() -
-    new Date(a.frontmatter.pubDate).valueOf()
-);
-const projects = (await Astro.glob("./projects/*.{md,mdx}")).sort(
-  (a, b) => a.frontmatter.order - b.frontmatter.order
+const allPosts = await getCollection('posts');
+const posts = allPosts.sort(
+  (a, b) => a.data.order - b.data.order
 );
 ---
 
@@ -27,23 +24,23 @@ const projects = (await Astro.glob("./projects/*.{md,mdx}")).sort(
   <Body>
     <Header />
     <Container classes="flex flex-col gap-32 pt-64">
-      <CardGrid itemNumber={projects.length}>
+      <CardGrid itemNumber={posts.length}>
         {
-          projects.map((project) => (
-            <ProjectCard url={project.url} project={project.frontmatter} />
+          posts.map((post) => (
+            <ProjectCard post={post} />
           ))
         }
       </CardGrid>
-      <section class="flex flex-col gap-24 mb-64">
-        <h2 class="font-bold text-32 text-slate-900">Last articles</h2>
-        <CardGrid itemNumber={posts.length}>
-          {
-            posts.map((post) => (
-              <ArticleCard url={post.url} post={post.frontmatter} />
-            ))
-          }
-        </CardGrid>
-      </section>
+      <!--<section class="flex flex-col gap-24 mb-64">-->
+      <!--  <h2 class="font-bold text-32 text-slate-900">Last articles</h2>-->
+      <!--  <CardGrid itemNumber={posts.length}>-->
+      <!--    {-->
+      <!--      posts.map((post) => (-->
+      <!--        <ArticleCard url={post.url} post={post.frontmatter} />-->
+      <!--      ))-->
+      <!--    }-->
+      <!--  </CardGrid>-->
+      <!--</section>-->
     </Container>
     <Footer />
   </Body>
