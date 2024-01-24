@@ -1,82 +1,80 @@
+import {z} from "astro:content";
+
 export const SITE_TITLE = "Robin Marillia | Portfolio.";
 export const SITE_DESCRIPTION = "Welcome to my website!";
 
-export enum Project {
-  Jsimple = "jsimple",
-  Solidjs = "solidjs",
-  BagstackCli = "bagstack-cli",
-  BagstackFigma = "bagstack-figma",
-  NathalieMura = "nathalie-mura",
-  Techwatch = "techwatch",
-  Randomart = "randomart",
-}
-
-export enum ProjectPill {
-  Experiment = "experiment",
-  Project = "project",
-  Design = "design",
-  Code = "code",
-  Nextjs = "nextjs",
-  Strapi = "strapi",
-  Figma = "figma",
-  Sveltekit = "sveltekit",
-  Svelte = "svelte",
-  Solidjs = "solidjs",
-  Typescript = "typescript",
-  Planetscale = "planetscale",
-}
+export const TopicsEnum = z.enum([
+    "experiment",
+    "project",
+    "article",
+    "design",
+    "code",
+    "nextjs",
+    "strapi",
+    "figma",
+    "sveltekit",
+    "svelte",
+    "solidjs",
+    "typescript",
+    "planetscale",
+]);
 
 const greenClasses = "bg-lime-100 text-lime-800 border-lime-300";
 const grayClasses = "bg-slate-200 text-slate-800 border-slate-300";
+const blueClasses = "bg-blue-200 text-blue-800 border-blue-300";
 const yellowClasses = "bg-yellow-100 text-yellow-800 border-yellow-300";
 
 export const PILLS_DATA = {
-  [ProjectPill.Experiment]: {
+  [TopicsEnum.enum.experiment]: {
     title: "Experiment",
     classes: yellowClasses,
   },
-  [ProjectPill.Project]: {
+  [TopicsEnum.enum.project]: {
     title: "Project",
     classes: greenClasses,
   },
-  [ProjectPill.Design]: {
+  [TopicsEnum.enum.design]: {
     title: "Design",
     classes: grayClasses,
   },
-  [ProjectPill.Code]: {
+  [TopicsEnum.enum.code]: {
     title: "Code",
     classes: grayClasses,
   },
-  [ProjectPill.Nextjs]: {
+  [TopicsEnum.enum.nextjs]: {
     title: "Nextjs",
     classes: grayClasses,
   },
-  [ProjectPill.Strapi]: {
+  [TopicsEnum.enum.strapi]: {
     title: "Strapi",
     classes: grayClasses,
   },
-  [ProjectPill.Figma]: {
+  [TopicsEnum.enum.figma]: {
     title: "Figma",
     classes: grayClasses,
   },
-  [ProjectPill.Sveltekit]: {
+  [TopicsEnum.enum.sveltekit]: {
     title: "Svelte kit",
     classes: grayClasses,
   },
-  [ProjectPill.Svelte]: {
+  [TopicsEnum.enum.svelte]: {
     title: "Svelte",
     classes: grayClasses,
   },
-  [ProjectPill.Solidjs]: {
+  [TopicsEnum.enum.solidjs]: {
     title: "Solidjs",
     classes: grayClasses,
   },
-  [ProjectPill.Typescript]: {
+  [TopicsEnum.enum.typescript]: {
     title: "Typescript",
     classes: grayClasses,
   },
-  [ProjectPill.Planetscale]: {
+  [TopicsEnum.enum.planetscale]: {
     title: "Planetscale",
     classes: grayClasses,
+  },
+  [TopicsEnum.enum.article]: {
+    title: "Article",
+    classes: blueClasses,
   },
 };

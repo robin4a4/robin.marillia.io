@@ -4,26 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="135b1d83-6783-49da-b5f0-1e9f6560c4d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/content/posts/config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/posts/[...slug].astro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/astro.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/astro.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProjectCard.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProjectCard.astro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/env.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/post.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/post.astro" afterDir="false" />
+    <list default="true" id="135b1d83-6783-49da-b5f0-1e9f6560c4d2" name="Changes" comment="start using content collections">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Pill.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Pill.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PillRow.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PillRow.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/compile-include-html.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/compile-include-html.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/fullkit.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/fullkit.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/jsimple.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/jsimple.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/nathalie-mura.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/nathalie-mura.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/shareboard.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/shareboard.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/solidjs.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/solidjs.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/content/posts/techwatch.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/techwatch.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/blog/carousel-custom-element-with-thumnails-selector.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/blog/create-a-slider-with-colored-track.mdx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/blog/create-a-swippable-carousel-with-scroll-timeline-api.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/create-a-swippable-carousel-with-scroll-timeline-api.mdx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.astro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/projects/compile-include-html.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/compile-include-html.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/projects/fullkit.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/fullkit.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/projects/jsimple.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/jsimple.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/projects/nathalie-mura.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/nathalie-mura.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/projects/shareboard.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/shareboard.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/projects/solidjs.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/solidjs.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/projects/techwatch.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/techwatch.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,35 +43,50 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;robin4a4&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="f7852996-daf5-4014-a456-a883295b9ccc" />
+        <option name="url" value="https://github.com/robin4a4/robin.marillia.io.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2bM4YdZQ9lctoTf8XdO6oTI7b5Z" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feat/upgrade__astro",
-    "last_opened_file_path": "/Users/robinmarillia/Documents/dev/lab/robin.marillia.io",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "pnpm",
-    "ts.external.directory.path": "/Applications/PyCharm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/upgrade__astro&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/robinmarillia/Documents/dev/lab/robin.marillia.io&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/PyCharm.app/Contents/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/content/posts" />
       <recent name="$PROJECT_DIR$/src/content/blog" />
       <recent name="$PROJECT_DIR$/src/content" />
     </key>
@@ -87,11 +99,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1706011663003</updated>
-      <workItem from="1706011664374" duration="3190000" />
+      <workItem from="1706011664374" duration="3879000" />
+      <workItem from="1706084410709" duration="1908000" />
+      <workItem from="1706100162935" duration="154000" />
     </task>
+    <task id="LOCAL-00001" summary="start using content collections">
+      <option name="closed" value="true" />
+      <created>1706014940555</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1706014940555</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="start using content collections" />
+    <option name="LAST_COMMIT_MESSAGE" value="start using content collections" />
   </component>
 </project>

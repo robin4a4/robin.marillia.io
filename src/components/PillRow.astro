@@ -1,11 +1,13 @@
 ---
-import type { ProjectPill } from '../config';
+import {z} from "astro:content";
+import {TopicsEnum} from "../config";
 import Pill from './Pill.astro'
 
 export interface Props {
-	topics: Array<ProjectPill>;
+	topics: Array<z.infer<typeof TopicsEnum>>;
 }
 const {topics} = Astro.props
+console.log(topics)
 ---
 
 <div class="flex gap-8">
