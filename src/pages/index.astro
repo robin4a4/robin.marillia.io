@@ -22,7 +22,7 @@ const posts = allPosts.filter(post => post.data.published).sort(
   </head>
   <Body>
     <Header />
-    <Container classes="flex flex-col gap-32 pt-64">
+    <Container classes="flex flex-col gap-32 py-64">
       <CardGrid itemNumber={posts.length}>
         {
           posts.map((post) => (

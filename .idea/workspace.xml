@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="135b1d83-6783-49da-b5f0-1e9f6560c4d2" name="Changes" comment="start using content collections">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Pill.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Pill.astro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PillRow.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PillRow.astro" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/compile-include-html.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/compile-include-html.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/fullkit.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/fullkit.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/jsimple.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/jsimple.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/nathalie-mura.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/nathalie-mura.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/shareboard.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/shareboard.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/solidjs.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/solidjs.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/content/posts/techwatch.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/techwatch.mdx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/blog/carousel-custom-element-with-thumnails-selector.mdx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/blog/create-a-slider-with-colored-track.mdx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/blog/create-a-swippable-carousel-with-scroll-timeline-api.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/src/content/posts/create-a-swippable-carousel-with-scroll-timeline-api.mdx" afterDir="false" />
+    <list default="true" id="135b1d83-6783-49da-b5f0-1e9f6560c4d2" name="Changes" comment="fix typings">
       <change beforePath="$PROJECT_DIR$/src/pages/index.astro" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.astro" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +86,7 @@
       <updated>1706011663003</updated>
       <workItem from="1706011664374" duration="3879000" />
       <workItem from="1706084410709" duration="1908000" />
-      <workItem from="1706100162935" duration="154000" />
+      <workItem from="1706100162935" duration="378000" />
     </task>
     <task id="LOCAL-00001" summary="start using content collections">
       <option name="closed" value="true" />
@@ -111,7 +96,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706014940555</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix typings">
+      <option name="closed" value="true" />
+      <created>1706100370537</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1706100370537</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,6 +112,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="start using content collections" />
-    <option name="LAST_COMMIT_MESSAGE" value="start using content collections" />
+    <MESSAGE value="fix typings" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix typings" />
   </component>
 </project>
