@@ -1,8 +1,9 @@
 ---
-import { PILLS_DATA, ProjectPill } from '../config';
+import { z } from 'astro:content';
+import { PILLS_DATA, TopicsEnum } from '../config';
 
 export interface Props {
-	topic: ProjectPill;
+	topic: z.infer<typeof TopicsEnum>;
 }
 const { topic } = Astro.props;
 ---

@@ -1,4 +1,6 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Container from "../components/Container.astro";
@@ -7,15 +9,7 @@ import Shell from "./shell.astro";
 import Body from "./body.astro";
 
 export interface Props {
-  content: {
-    title: string;
-    description: string;
-    pubDate?: string;
-    updatedDate?: string;
-    heroImage?: string;
-    order?: number;
-    githubLink?: string;
-  };
+  content: CollectionEntry<"posts">;
 }
 
 const {
