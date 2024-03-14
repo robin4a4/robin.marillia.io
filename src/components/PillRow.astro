@@ -1,19 +1,20 @@
 ---
-import {z} from "astro:content";
-import {TopicsEnum} from "../config";
-import Pill from './Pill.astro'
+import { z } from "astro:content";
+import { TopicsEnum } from "../config";
+import Pill from "./Pill.astro";
 
 export interface Props {
-	topics: Array<z.infer<typeof TopicsEnum>>;
+  topics: Array<z.infer<typeof TopicsEnum>>;
 }
-const {topics} = Astro.props
-console.log(topics)
+const { topics } = Astro.props;
 ---
 
 <div class="flex gap-8">
-  {topics.map((topic) => (
-    <>
-       <Pill topic={topic}/>
-    </>
-  ))}
+  {
+    topics.map((topic) => (
+      <>
+        <Pill topic={topic} />
+      </>
+    ))
+  }
 </div>
